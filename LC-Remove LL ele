@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+
+struct ListNode* removeElements(struct ListNode* head, int val) {
+    // Create dummy node
+    struct ListNode* dummy = (struct ListNode*)malloc(sizeof(struct ListNode));
+    dummy->val = 0;
+    dummy->next = head;
+
+    struct ListNode* curr = dummy;
+
+    while (curr->next != NULL) {
+        if (curr->next->val == val) {
+            // remove node
+            struct ListNode* temp = curr->next;
+            curr->next = curr->next->next;
+            free(temp);
+        } else {
+            curr = curr->next;
+        }
+    }
+
+    struct ListNode* newHead = dummy->next;
+    free(dummy);
+    return newHead;
+}
